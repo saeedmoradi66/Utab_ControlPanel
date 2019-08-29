@@ -19,7 +19,13 @@
         <ejs-grid [dataSource]="data" [enableRtl]='true' [allowPaging]="true" [pageSettings]="pageSettings" [allowSorting]="true"
           [allowFiltering]="true" [allowGrouping]="true" [filterSettings]="filterOptions" [toolbar]="toolbarOptions"
           [editSettings]='editSettings' [allowPdfExport]='true' [allowExcelExport]='true' allowResizing='true'
-          showColumnChooser='true' allowReordering='true' (toolbarClick)='toolbarClick($event)'>
+          showColumnChooser='true' allowReordering='true' allowTextWrap='true' [textWrapSettings]='wrapSettings'  (toolbarClick)='toolbarClick($event)'>
+            <e-columns>
+          <e-column field='Id' headerText='شماره'  textAlign='Right' isPrimaryKey='true' width=100></e-column>
+          <e-column field='CompanyName' headerText='نام شرکت' width=120></e-column>
+          <e-column field='PostalCode' [validationRules]="postalCodeRules" headerText='گدپستی' textAlign='Right' editType='numericedit'  width=120
+            format='C2'></e-column>
+            </e-columns>
         </ejs-grid>
 
       </div>

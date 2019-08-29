@@ -12,7 +12,8 @@ import {
   GridComponent, PageSettingsModel,
   FilterSettingsModel,
   ToolbarItems,
-  EditSettingsModel
+  EditSettingsModel,
+  TextWrapSettingsModel
 } from '@syncfusion/ej2-angular-grids';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
 
@@ -53,10 +54,17 @@ L10n.load({
       'SelectAll': 'انتخاب همه',
       'StartsWith': 'شروع شود با',
       'EndsWith': 'ختم شود به',
-      'Contains':'حاوی',
+      'Contains': 'حاوی',
       'Equal': 'مساوی',
       'NotEqual': 'نا مساوی',
-
+      'Matchs': 'جستجو حاصلی دربرنداشت',
+      'NoResult': 'جستجو حاصلی دربرنداشت',
+      'EditOperationAlert': 'هیچ رکوردی  برای عملکرد ویرایش انتخاب نشده است',
+      'DeleteOperationAlert': 'هیچ رکوردی  برای عملکرد حذف انتخاب نشده است',
+      'ConfirmDelete': 'آیا مطمئن هستید که می خواهید رکورد را حذف کنید؟',
+      'SaveButton': 'ذخیره',
+      'EditFormTitle': 'جزئیات',
+      'AddFormTitle': 'اضافه کردن رکورد جدید',
 
 
 
@@ -71,7 +79,8 @@ L10n.load({
       'previousPageTooltip': 'به صفحه قبل بروید',
       'nextPagerTooltip': 'به صفحه بعد بروید',
       'previousPagerTooltip': 'به صفحه قبل بروید',
-      'pagerDropDown':'ایتم در هر صفحه'
+      'pagerDropDown': 'ایتم در هر صفحه',
+      'All': 'همه'
     }
   }
 });
@@ -97,8 +106,9 @@ export class UsersComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public toolbarOptions: ToolbarItems[];
   public editSettings: EditSettingsModel;
-
+  public wrapSettings: TextWrapSettingsModel;
   public grid: GridComponent;
+  public postalCodeRules: object;
   ngOnInit(): void {
     this.data = customers;
     this.editSettings = {
@@ -106,9 +116,11 @@ export class UsersComponent implements OnInit {
       allowAdding: true,
       allowDeleting: true,
       allowEditOnDblClick: true,
-      allowNextRowEdit: true
+      allowNextRowEdit: true,
+      showDeleteConfirmDialog: true,
+      mode: 'Dialog'
     };
-    this.pageSettings = { pageSize: 12, pageSizes: true,pageCount:10 };
+    this.pageSettings = { pageSize: 12, pageSizes: true, pageCount: 10 };
     this.filterOptions = { type: 'Menu' };
     this.toolbarOptions = [
       'Search',
@@ -124,6 +136,8 @@ export class UsersComponent implements OnInit {
       'WordExport',
       'Print'
     ];
+    this.wrapSettings = { wrapMode: 'Content' };
+    this.postalCodeRules={required:true,minLength:3}
   }
   toolbarClick(args: ClickEventArgs): void {
     if (args.item.id === 'Grid_pdfexport') {

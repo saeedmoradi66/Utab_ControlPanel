@@ -26,7 +26,7 @@ import {
   ResizeService,
   ColumnChooserService
 } from '@syncfusion/ej2-angular-grids';
-
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
 
 @NgModule({
@@ -43,7 +43,8 @@ import {
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    GridModule
+    GridModule,
+    DialogModule
   ],
   providers: [
     PageService,
