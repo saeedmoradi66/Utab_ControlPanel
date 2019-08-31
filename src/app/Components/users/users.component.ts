@@ -137,7 +137,7 @@ export class UsersComponent implements OnInit {
       'Print'
     ];
     this.wrapSettings = { wrapMode: 'Content' };
-    this.postalCodeRules={required:true,minLength:3}
+    this.postalCodeRules = { required: true, minLength: 3 }
   }
   toolbarClick(args: ClickEventArgs): void {
     if (args.item.id === 'Grid_pdfexport') {
