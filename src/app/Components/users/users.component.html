@@ -14,21 +14,104 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="white-box">
-
-      <div >
-        <ejs-grid [dataSource]="data" [enableRtl]='true' [allowPaging]="true" [pageSettings]="pageSettings" [allowSorting]="true"
-          [allowFiltering]="true" [allowGrouping]="true" [filterSettings]="filterOptions" [toolbar]="toolbarOptions"
-          [editSettings]='editSettings' [allowPdfExport]='true' [allowExcelExport]='true' allowResizing='true'
-          showColumnChooser='true' allowReordering='true' allowTextWrap='true' [textWrapSettings]='wrapSettings'  (toolbarClick)='toolbarClick($event)'>
-            <e-columns>
-          <e-column field='Id' headerText='شماره'  textAlign='Right' isPrimaryKey='true' width=100></e-column>
-          <e-column field='CompanyName' headerText='نام شرکت' width=120></e-column>
-          <e-column field='PostalCode' [validationRules]="postalCodeRules" headerText='گدپستی' textAlign='Right' editType='numericedit'  width=120
-            format='C2'></e-column>
-            </e-columns>
+      <div>
+        <ejs-grid
+          [dataSource]="data"
+          [enableRtl]="true"
+          [allowPaging]="true"
+          [pageSettings]="pageSettings"
+          [allowSorting]="true"
+          [allowFiltering]="true"
+          [allowGrouping]="true"
+          [filterSettings]="filterOptions"
+          [toolbar]="toolbarOptions"
+          [editSettings]="editSettings"
+          [allowPdfExport]="true"
+          [allowExcelExport]="true"
+          allowResizing="true"
+          showColumnChooser="true"
+          allowReordering="true"
+          allowTextWrap="true"
+          [textWrapSettings]="wrapSettings"
+          (toolbarClick)="toolbarClick($event)"
+        >
+          <e-columns>
+            <e-column
+              field="Id"
+              headerText="شماره"
+              textAlign="Right"
+              isPrimaryKey="true"
+              width="100"
+            ></e-column>
+            <e-column
+              field="CompanyName"
+              headerText="نام شرکت"
+              width="120"
+            ></e-column>
+            <e-column
+              field="PostalCode"
+              [validationRules]="postalCodeRules"
+              headerText="گدپستی"
+              textAlign="Right"
+              editType="numericedit"
+              width="120"
+              format="C2"
+            ></e-column>
+          </e-columns>
         </ejs-grid>
-
       </div>
     </div>
   </div>
 </div>
+<button
+  class="e-control e-btn"
+  style="position: absolute;"
+  id="targetButton"
+  (click)="onOpenDialog($event)"
+>
+  Open Dialog
+</button>
+<div #container class="root-container"></div>
+<ejs-dialog
+  id="dialog"
+  #template
+  showCloseIcon="true"
+  (open)="dialogOpen()"
+  height="250px"
+  
+  width="435px"
+
+>
+  <ng-template #footerTemplate>
+    <input
+      id="inVal"
+      class="e-input"
+      type="text"
+      placeholder="Enter your message here!"
+    />
+    <button
+      id="sendButton"
+      class="e-control e-btn e-primary sendButton"
+      data-ripple="true"
+    >
+      Send
+    </button>
+  </ng-template>
+  <ng-template #content>
+    <div class="dialogContent">
+      <span class="dialogText"
+        >Greetings Nancy! When will you share me the source files of the
+        project?</span
+      >
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <img
+      class="img2"
+      src="https://ej2.syncfusion.com/products/typescript/dialog/template/images/1.png"
+      style="display: inline-block;"
+      alt="header image"
+    />
+    <div title="Nancy" class="e-icon-settings dlg-template">Nancy</div>
+  </ng-template>
+</ejs-dialog>
