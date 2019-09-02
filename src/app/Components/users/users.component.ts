@@ -22,7 +22,7 @@ import {
   EditSettingsModel,
   TextWrapSettingsModel
 } from '@syncfusion/ej2-angular-grids';
-import { ClickEventArgs } from '@syncfusion/ej2-navigations/src/toolbar';
+import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 
 setCulture('fa-FA');
@@ -92,13 +92,13 @@ L10n.load({
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  constructor(private builder: FormBuilder) {}
+  constructor(private builder: FormBuilder) { }
 
   public data: object[];
 
   public pageSettings: PageSettingsModel;
   public filterOptions: FilterSettingsModel;
-  public toolbarOptions: ToolbarItems[];
+  public toolbarOptions: ToolbarItems[] | object;
   public editSettings: EditSettingsModel;
   public wrapSettings: TextWrapSettingsModel;
   public grid: GridComponent;
@@ -106,7 +106,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('template', { static: true }) template: DialogComponent;
 
   // Sample level code to handle the button click action
-  public onOpenDialog = function(event: any): void {
+  public onOpenDialog = function (event: any): void {
     // Call the show method to open the Dialog
     this.template.show();
   };
@@ -135,13 +135,14 @@ export class UsersComponent implements OnInit {
       'ExcelExport',
       'PdfExport',
       'WordExport',
-      'Print'
+      'Print', { text: 'Click', tooltipText: 'Click', prefixIcon: 'e-expand', id: 'Click' }
     ];
     this.wrapSettings = { wrapMode: 'Content' };
     this.postalCodeRules = { required: true, minLength: 3 };
   }
   toolbarClick(args: ClickEventArgs): void {
-    if (args.item.id === 'Grid_pdfexport') {
+    alert(args.item.id);
+    if (args.item.id === 'grid_649044720_0_pdfexport') {
       // 'Grid_pdfexport' -> Grid component id + _ + toolbar item name
       this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
@@ -156,4 +157,4 @@ export class UsersComponent implements OnInit {
   templateUrl: './users.dialog.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersDialogComponent {}
+export class UsersDialogComponent { }
