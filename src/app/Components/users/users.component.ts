@@ -92,7 +92,7 @@ L10n.load({
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  constructor(private builder: FormBuilder) { }
+  constructor(private builder: FormBuilder) {}
 
   public data: object[];
 
@@ -103,13 +103,11 @@ export class UsersComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
   public grid: GridComponent;
   public postalCodeRules: object;
-  @ViewChild('template', { static: true }) template: DialogComponent;
-
-  // Sample level code to handle the button click action
-  public onOpenDialog = function (event: any): void {
-    // Call the show method to open the Dialog
-    this.template.show();
-  };
+  public dialog: DialogComponent;
+  openDialog() {
+    // tslint:disable-next-line: no-use-before-declare
+    this.dialog.open(UsersDialogComponent);
+  }
   ngOnInit(): void {
     this.data = customers;
     this.editSettings = {
@@ -128,26 +126,44 @@ export class UsersComponent implements OnInit {
       'Add',
       'Delete',
       'Edit',
-      'Cancel',
-      'Update',
+
       'ColumnChooser',
       'CsvExport',
       'ExcelExport',
       'PdfExport',
       'WordExport',
-      'Print', { text: 'Click', tooltipText: 'Click', prefixIcon: 'e-expand', id: 'Click' }
+      'Print',
+      {
+        text: 'جدید',
+        tooltipText: 'Click',
+        prefixIcon: 'e-add',
+        id: 'btnAdd'
+      },
+      {
+        text: 'حذف',
+        tooltipText: 'Click',
+        prefixIcon: 'e-delete',
+        id: 'btnDel'
+      },
+      {
+        text: 'ویرایش',
+        tooltipText: 'Click',
+        prefixIcon: 'e-edit',
+        id: 'btnEdit'
+      }
     ];
     this.wrapSettings = { wrapMode: 'Content' };
     this.postalCodeRules = { required: true, minLength: 3 };
   }
   toolbarClick(args: ClickEventArgs): void {
-    alert(args.item.id);
     if (args.item.id === 'grid_649044720_0_pdfexport') {
       // 'Grid_pdfexport' -> Grid component id + _ + toolbar item name
       this.grid.pdfExport();
     } else if (args.item.id === 'Grid_excelexport') {
       // 'Grid_pdfexport' -> Grid component id + _ + toolbar item name
       this.grid.excelExport();
+    } else if (args.item.id === 'btnAdd') {
+      this.openDialog();
     }
   }
 }
@@ -157,4 +173,4 @@ export class UsersComponent implements OnInit {
   templateUrl: './users.dialog.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersDialogComponent { }
+export class UsersDialogComponent {}
