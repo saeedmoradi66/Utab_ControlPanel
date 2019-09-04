@@ -27,8 +27,9 @@ import {
   ColumnChooserService
 } from '@syncfusion/ej2-angular-grids';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,10 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
     AppRoutingModule,
     ReactiveFormsModule,
     GridModule,
-    DialogModule
+    DialogModule,
+    MatDialogModule,
+    ButtonModule,
+    TextBoxModule
   ],
   providers: [
     PageService,
@@ -63,4 +67,4 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
   bootstrap: [AppComponent],
   entryComponents: [UsersDialogComponent]
 })
-export class AppModule { }
+export class AppModule {}

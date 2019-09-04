@@ -24,6 +24,7 @@ import {
 } from '@syncfusion/ej2-angular-grids';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { MatDialog } from '@angular/material/dialog';
 
 setCulture('fa-FA');
 
@@ -92,7 +93,7 @@ L10n.load({
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  constructor(private builder: FormBuilder) {}
+  constructor(private builder: FormBuilder, private dialog: MatDialog) {}
 
   public data: object[];
 
@@ -103,7 +104,7 @@ export class UsersComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
   public grid: GridComponent;
   public postalCodeRules: object;
-  public dialog: DialogComponent;
+
   openDialog() {
     // tslint:disable-next-line: no-use-before-declare
     this.dialog.open(UsersDialogComponent);
